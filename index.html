@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draft Order Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        #results {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fantasy Football Draft Order Generator</h1>
+    <label for="names">Enter league member names (one per line):</label><br>
+    <textarea id="names" rows="10" cols="30"></textarea><br><br>
+    <button onclick="generateDraftOrder()">Generate Draft Order</button>
+    <div id="results"></div>
+
+    <script>
+        function generateDraftOrder() {
+            const names = document.getElementById('names').value.trim().split('\n').filter(Boolean);
+            if (names.length < 2) {
+                alert("Please enter at least two names.");
+                return;
+            }
+
+            const shuffledNames = names.sort(() => Math.random() - 0.5);
+            let resultHtml = "<h2>Draft Order:</h2><ol>";
+            shuffledNames.forEach(name => {
+                resultHtml += `<li>${name}</li>`;
+            });
+            resultHtml += "</ol>";
+
+            document.getElementById('results').innerHTML = resultHtml;
+        }
+    </script>
+</body>
+</html>
